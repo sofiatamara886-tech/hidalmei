@@ -20,7 +20,7 @@ require_once BASE_PATH . '/includes/functions.php';
         </div>
         
         <nav style="display: flex; align-items: center; gap: 1.5rem;">
-            <a href="<?= BASE_URL ?>views/catalog/index.php" style="text-decoration: none; color: #333;">Inicio</a>
+            <a href="<?= BASE_URL ?>views/home.php" style="text-decoration: none; color: #333;">Inicio</a>
             <a href="<?= BASE_URL ?>views/catalog/index.php" style="text-decoration: none; color: #333;">Catálogo</a>
             
           <?php if (isAuthenticated()): ?>
