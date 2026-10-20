@@ -42,7 +42,7 @@ class Product {
 
     // CREAR
     public function create($nombre, $descripcion, $precio, $categoria_id, $pais_id) {
-        $sql = "INSERT INTO productos (nombre, descripcion, precio, categoria_id, pais_id) 
+        $sql = "INSERT INTO producto (nombre, descripcion, precio, categoria_id, pais_id) 
                 VALUES (:nombre, :descripcion, :precio, :categoria_id, :pais_id)";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([
@@ -56,7 +56,7 @@ class Product {
 
     // ACTUALIZAR
     public function update($id, $nombre, $descripcion, $precio, $categoria_id, $pais_id) {
-        $sql = "UPDATE productos 
+        $sql = "UPDATE producto
                 SET nombre = :nombre, descripcion = :descripcion, precio = :precio, categoria_id = :categoria_id, pais_id = :pais_id 
                 WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
