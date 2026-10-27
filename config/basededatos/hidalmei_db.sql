@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2026 a las 20:38:46
+-- Tiempo de generación: 22-10-2026 a las 23:26:03
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -119,6 +119,14 @@ CREATE TABLE `roles` (
   `descripcion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'Administrador', 'Rol con permisos de administración'),
+(2, 'cliente', 'Cliente del e-commerce');
+
 -- --------------------------------------------------------
 
 --
@@ -135,6 +143,15 @@ CREATE TABLE `usuarios` (
   `rol_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `telefono`, `direccion`, `rol_id`, `created_at`) VALUES
+(2, 'maria', 'mpena@gmail.com', '$2y$10$89jbYqnUK.lXUwXFTVA2uOjlUFlCVlRupD2CBxBWgXT5wuqk/MTxu', NULL, NULL, 2, '2026-10-20 21:13:29'),
+(3, 'fabio', 'ckhed@gmail.com', '$2y$10$qAGzZY3LRFQfN/U0RkzzUecZllHNstKAPMy3ihN4nxIkA1d7c/.AO', NULL, NULL, 2, '2026-10-22 20:01:31'),
+(4, 'pp', 'ppsanchez@gmail.com', '$2y$10$wG4HfVpJ.x/JFtsTjH8fZ.sx7GB484wZVUEyynLsWMxmfdIhoEAyK', NULL, NULL, 2, '2026-10-22 20:03:21');
 
 --
 -- Índices para tablas volcadas
@@ -236,13 +253,13 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

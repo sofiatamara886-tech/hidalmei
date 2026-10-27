@@ -11,17 +11,34 @@ class ProductController {
     }
 
     public function store() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nombre = sanitize($_POST['nombre'] ?? '');
-            $descripcion = sanitize($_POST['descripcion'] ?? '');
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        try {
+            // Recoger los datos del formulario de forma segura
+            $nombre = $_POST['nombre'] ?? '';
+            $descripcion = $_POST['descripcion'] ?? '';
             $precio = $_POST['precio'] ?? 0;
-            $categoria = sanitize($_POST['categoria'] ?? '');
+            $categoria_id = $_POST['categoria_id'] ?? 1; 
+            $pais_id = $_POST['pais_id'] ?? 1;           
 
-            $this->productModel->create($nombre, $descripcion, $precio, $categoria);
-            header('Location: ' . BASE_URL . 'views/admin/products.php');
+            // Instanciar el modelo y ejecutar la creación
+            $productModel = new Product();
+            $resultado = $productModel->create($nombre, $descripcion, $precio, $categoria_id, $pais_id);
+
+            if ($resultado) {
+                // Redirigir al dashboard si se guardó con éxito
+                header('Location: ' . BASE_URL . 'views/admin/dashboard.php');
+                exit;
+            } else {
+                echo "No se pudo guardar el producto en la base de datos.";
+            }
+
+        } catch (Exception $e) {
+            // Mostrar cualquier error inesperado de SQL o PHP
+            echo "Error crítico: " . $e->getMessage();
             exit;
         }
     }
+}
 
     public function update() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

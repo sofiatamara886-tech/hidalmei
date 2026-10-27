@@ -1,56 +1,76 @@
 <?php 
-require_once __DIR__ . '/../../config/config.php';
-require_once BASE_PATH . '/includes/functions.php';
+// Solo definimos BASE_PATH si no existe previamente
+if (!defined('BASE_PATH')) {
+    define('BASE_PATH', dirname(__DIR__, 2));
+}
+
+// Verificamos si BASE_URL no ha sido definida para evitar el aviso
+if (!defined('BASE_URL') && file_exists(BASE_PATH . '/config/config.php')) {
+    require_once BASE_PATH . '/config/config.php';
+}
+
 require_once BASE_PATH . '/includes/header.php'; 
 ?>
 
-
-<div style="max-width: 500px; margin: 2rem auto; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-    <h2 style="text-align: center; color: #333; margin-bottom: 0.5rem;">Crea tu cuenta en HiDalMei</h2>
-    <p style="text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 1.5rem;">Conéctate con los mejores proveedores de Corea del Sur, Japón y China.</p>
-
-    <?php if (isset($error)): ?>
-        <div style="background: #ff7675; color: white; padding: 0.8rem; border-radius: 4px; margin-bottom: 1rem; text-align: center;">
-            <?= sanitize($error) ?>
-        </div>
-    <?php endif; ?>
+<div style="max-width: 500px; margin: 2rem auto; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <p style="text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 1.5rem;">
+        Conéctate con los mejores proveedores de Corea del Sur, Japón y China.
+    </p>
 
     <form action="<?= BASE_URL ?>controllers/AuthController.php?action=register" method="POST">
-        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+        
+        <!-- Nombre y Apellido -->
+        <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
             <div style="flex: 1;">
-                <label style="display: block; font-weight: bold; margin-bottom: 0.3rem;">Nombre *</label>
-                <input type="text" name="nombre" required style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                <label for="nombre" class="form-label" style="font-weight: bold; color: #333;">Nombre *</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
             </div>
             <div style="flex: 1;">
-                <label style="display: block; font-weight: bold; margin-bottom: 0.3rem;">Apellido *</label>
-                <input type="text" name="apellido" required style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                <label for="apellido" class="form-label" style="font-weight: bold; color: #333;">Apellido *</label>
+                <input type="text" id="apellido" name="apellido" class="form-control" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
             </div>
         </div>
 
-        <div style="margin-bottom: 1rem;">
-            <label style="display: block; font-weight: bold; margin-bottom: 0.3rem;">Correo Electrónico *</label>
-            <input type="email" name="email" required style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        <!-- Correo Electrónico -->
+        <div class="mb-3" style="margin-bottom: 1rem;">
+            <label for="email" class="form-label" style="font-weight: bold; color: #333;">Correo Electrónico *</label>
+            <input type="email" id="email" name="email" class="form-control" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
         </div>
 
-        <div style="margin-bottom: 1rem;">
-            <label style="display: block; font-weight: bold; margin-bottom: 0.3rem;">Contraseña * (Mínimo 6 caracteres)</label>
-            <input type="password" name="password" minlength="6" required style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        <!-- ÚNICO CAMPO DE CONTRASEÑA (CON RESTRICCIONES STRICTAS) -->
+        <div class="mb-3" style="margin-bottom: 1rem;">
+            <label for="password" class="form-label" style="font-weight: bold; color: #333;">Contraseña *</label>
+            <input type="password" 
+                   id="password" 
+                   name="password" 
+                   class="form-control" 
+                   required 
+                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                   title="Debe contener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una minúscula y un número"
+                   placeholder="Mínimo 8 caracteres (1 mayúscula, 1 minúscula, 1 número)"
+                   style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+            <small style="font-size: 0.8rem; color: #6c757d; display: block; margin-top: 4px;">
+                Mínimo 8 caracteres (1 mayúscula, 1 minúscula y 1 número).
+            </small>
         </div>
 
-        <div style="margin-bottom: 1rem;">
-            <label style="display: block; font-weight: bold; margin-bottom: 0.3rem;">Teléfono de Contacto</label>
-            <input type="tel" name="telefono" style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        <!-- Teléfono de Contacto -->
+        <div class="mb-3" style="margin-bottom: 1rem;">
+            <label for="telefono" class="form-label" style="font-weight: bold; color: #333;">Teléfono de Contacto</label>
+            <input type="tel" id="telefono" name="telefono" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
         </div>
 
-        <div style="margin-bottom: 1.5rem;">
-            <label style="display: block; font-weight: bold; margin-bottom: 0.3rem;">Dirección de Entrega Principal</label>
-            <textarea name="direccion" rows="3" placeholder="Calle, Número, Ciudad, Departamento" style="width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
+        <!-- Dirección -->
+        <div class="mb-3" style="margin-bottom: 1.5rem;">
+            <label for="direccion" class="form-label" style="font-weight: bold; color: #333;">Dirección de Entrega Principal</label>
+            <textarea id="direccion" name="direccion" class="form-control" rows="2" placeholder="Calle, Número, Ciudad, Departamento" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
         </div>
 
-        <!-- BOTÓN DE GUARDAR / REGISTRARSE -->
-        <button type="submit" style="width: 100%; padding: 0.8rem; background: #e84393; color: white; border: none; border-radius: 4px; font-weight: bold; font-size: 1rem; cursor: pointer;">
+        <!-- Botón Guardar -->
+        <button type="submit" style="width: 100%; padding: 0.8rem; background: #e84393; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
             Crear Cuenta / Guardar
         </button>
+
     </form>
 </div>
 

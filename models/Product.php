@@ -41,20 +41,23 @@ class Product {
     }
 
     // CREAR
-    public function create($nombre, $descripcion, $precio, $categoria_id, $pais_id) {
-        $sql = "INSERT INTO producto (nombre, descripcion, precio, categoria_id, pais_id) 
-                VALUES (:nombre, :descripcion, :precio, :categoria_id, :pais_id)";
-        $stmt = $this->conn->prepare($sql);
-        return $stmt->execute([
-            ':nombre' => $nombre,
-            ':descripcion' => $descripcion,
-            ':precio' => $precio,
-            ':categoria_id' => $categoria_id,
-            ':pais_id' => $pais_id
-        ]);
-    }
+   public function create($nombre, $descripcion, $precio, $categoria_id, $pais_id) {
+    // Generar un slug único basado en el nombre (ej: "Libretas Bonitas" -> "libretas-bonitas-64a1b2")
+    $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $nombre))) . '-' . uniqid();
 
-    // ACTUALIZAR
+    $sql = "INSERT INTO productos (nombre, slug, descripcion, precio, categoria_id, pais_id) 
+            VALUES (:nombre, :slug, :descripcion, :precio, :categoria_id, :pais_id)";
+            
+    $stmt = $this->conn->prepare($sql);
+    return $stmt->execute([
+        ':nombre' => $nombre,
+        ':slug' => $slug,
+        ':descripcion' => $descripcion,
+        ':precio' => $precio,
+        ':categoria_id' => $categoria_id,
+        ':pais_id' => $pais_id
+    ]);
+}   // ACTUALIZAR
     public function update($id, $nombre, $descripcion, $precio, $categoria_id, $pais_id) {
         $sql = "UPDATE producto
                 SET nombre = :nombre, descripcion = :descripcion, precio = :precio, categoria_id = :categoria_id, pais_id = :pais_id 

@@ -1,4 +1,9 @@
 <?php
+ob_start(); // <-- Añade esto en la primera línea para capturar el búfer de salida
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/../config/config.php';
 require_once BASE_PATH . '/includes/functions.php';
 require_once BASE_PATH . '/models/User.php';
@@ -51,15 +56,21 @@ class AuthController {
                 }
 
                 $_SESSION['usuario_id'] = $usuario['id'];
-                $_SESSION['usuario_nombre'] = $usuario['nombre'];
-                $_SESSION['mensaje'] = "Se inició sesión con éxito";
+            $_SESSION['usuario_nombre'] = $usuario['nombre'];
+            $_SESSION['usuario_rol'] = (int)($usuario['rol_id'] ?? 2); // <-- Agrégala aquí
+           $_SESSION['mensaje'] = "Se inició sesión con éxito";
 
-                header('Location: ' . BASE_URL . 'index.php');
-                exit;
+            // Validar redirección según el rol del usuario
+            if ((int)$_SESSION['usuario_rol'] === 1) {
+                header('Location: ' . BASE_URL . 'views/admin/dashboard.php');
             } else {
-                $error = "Correo o contraseña incorrectos.";
-                require_once BASE_PATH . '/views/auth/login.php';
+                header('Location: ' . BASE_URL . 'index.php');
             }
+            exit;
+        } else {
+            $error = "Correo o contraseña incorrectos.";
+            require_once BASE_PATH . '/views/auth/login.php';
+        }
         }
     }
 
@@ -84,3 +95,23 @@ if ($action === 'register') {
 } else {
     $auth->login();
 }
+// Capturar los datos del formulario
+$email = $_POST['email'] ?? '';
+$password = $_POST['password'] ?? '';
+$nombre = $_POST['nombre'] ?? '';
+
+// Expresión regular ajustada para validar seguridad de la contraseña
+$patronPassword = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/';
+
+if (!preg_match($patronPassword, $password)) {
+    // Redirigir con error si no cumple los requisitos
+    $_SESSION['error'] = 'La contraseña debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula y un número.';
+    header('Location: ' . BASE_URL . 'views/auth/register.php');
+    exit;
+}
+
+// Si la contraseña es válida, procedemos a encriptarla y guardarla
+$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+// Llamar al modelo para registrar al usuario en la base de datos hidalmei_db
+// User::create($nombre, $email, $passwordHash);

@@ -19,9 +19,20 @@ $projectFolder = explode('/', trim($scriptName, '/'))[0] ?? '';
 $baseUrlPath = $projectFolder ? '/' . $projectFolder . '/' : '/';
 
 // 3. Constantes de la Aplicación
-define('APP_NAME', 'HiDalMei - Importaciones Asiáticas');
-define('BASE_URL', $protocol . $host . $baseUrlPath);
+if (!defined('APP_NAME')) {
+    define('APP_NAME', 'HiDalMei - Importaciones Asiáticas');
+}
 
+if (!defined('BASE_URL')) {
+    define('BASE_URL', $protocol . $host . $baseUrlPath);
+}
+// En config/config.php
+if (!defined('ADMIN_EMAIL')) {
+    define('ADMIN_EMAIL', 'admin@hidalmei.com'); // Cambia esto por el correo que prefieras
+}
+if (isset($_SESSION['usuario_email']) && $_SESSION['usuario_email'] === ADMIN_EMAIL) {
+    // Es el administrador supremo
+}
 // 4. Parámetros de Conexión a la Base de Datos MySQL
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'hidalmei_db');
