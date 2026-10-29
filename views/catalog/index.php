@@ -18,8 +18,6 @@ $productos = $productModel->getAll();
         <h2 class="fw-bold">Explora por Categoría</h2>
         <p class="text-muted">Encuentra tus tendencias asiáticas favoritas</p>
     </div>
-    
-    <!-- Aquí puedes mantener tus secciones de categorías o botones si los tienes -->
 
     <h2 class="mb-4 fw-bold mt-5">Catálogo de Productos Exclusivos</h2>
     <div class="row">
@@ -37,8 +35,16 @@ $productos = $productModel->getAll();
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title fw-bold"><?= htmlspecialchars($prod['nombre']) ?></h5>
                             <p class="card-text text-muted small"><?= htmlspecialchars(substr($prod['descripcion'], 0, 80)) ?>...</p>
+                            
                             <div class="mt-auto">
                                 <span class="h5 text-primary fw-bold">$<?= number_format($prod['precio'], 0, ',', '.') ?> COP</span>
+                                
+                                <!-- Formulario para agregar al carrito -->
+                                <form action="<?= BASE_URL ?>controllers/CartController.php?action=add" method="POST" class="mt-2">
+                                    <input type="hidden" name="product_id" value="<?= $prod['id'] ?>">
+                                    <input type="hidden" name="cantidad" value="1">
+                                    <button type="submit" class="btn btn-outline-primary w-100">Agregar al Carrito</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -52,7 +58,7 @@ $productos = $productModel->getAll();
     </div>
 </div>
 
-<?php 
+<?php
 // 3. El pie de página al final
-require_once BASE_PATH . '/includes/footer.php'; 
+require_once BASE_PATH . '/includes/footer.php';
 ?>

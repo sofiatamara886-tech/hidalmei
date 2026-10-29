@@ -55,31 +55,29 @@ require_once BASE_PATH . '/includes/functions.php';
 
     </header>
     <!-- Ventana Modal de Tratamiento de Datos (Colócala al final de tu archivo header.php, fuera del menú) -->
+            <!-- Enlace en la barra de navegación -->
+<li class="nav-item">
+    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalTratamientoDatos">Tratamiento de datos</a>
+</li>
+<!-- Modal de Tratamiento de Datos -->
 <div class="modal fade" id="modalTratamientoDatos" tabindex="-1" aria-labelledby="modalTratamientoDatosLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.15); overflow: hidden;">
-            
-            <!-- Cabecera con la identidad visual de HiDalMei -->
-            <div class="modal-header" style="background-color: #fff; border-bottom: 2px solid #f1f1f1; padding: 1.2rem 1.5rem;">
-                <h5 class="modal-title" id="modalTratamientoDatosLabel" style="font-weight: bold; color: #e84393; font-size: 1.25rem;">
-                    Aviso de Tratamiento de Datos
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="cerrarModalTratamiento()" aria-label="Close"></button>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title fw-bold text-dark" id="modalTratamientoDatosLabel">Tratamiento de Datos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            
-            <!-- Cuerpo del mensaje -->
-            <div class="modal-body" style="padding: 2rem; color: #444; line-height: 1.7; font-size: 1rem; text-align: justify;">
-                <p style="margin: 0;">
-                    El presente proyecto tiene fines exclusivamente academicos. Los datos utilizados durante el desarrollo, las pruebas y la demostracion del sistema son ficticios y fueron creados con fines unicamente de simulacion. El sistema no recolecta , almacena ni procesa datos personales de estudiantes , docentes o terceros.
+            <div class="modal-body py-4">
+                <p class="text-secondary mb-0" style="line-height: 1.6;">
+                    El presente proyecto tiene fines exclusivamente <strong>académicos</strong>. Los datos utilizados durante el desarrollo, las pruebas y la <strong>demostración</strong> del sistema son ficticios y fueron creados únicamente con fines de <strong>simulación</strong>. El sistema no recolecta, almacena ni procesa datos personales reales de estudiantes, docentes o terceros.
                 </p>
             </div>
-            
-            <!-- Pie de página con el botón de cierre estilizado -->
-            <div class="modal-footer" style="border-top: 1px solid #f1f1f1; background-color: #fafafa; padding: 1rem 1.5rem;">
-                <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #e84393; color: white; border-radius: 8px; padding: 8px 20px; font-weight: 500; border: none;">
-                    Cerrar
-                </button>
-            
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Entendido</button>
+            </div>
+        </div>
+    </div>
+</div>
             </div>
 
         </div>

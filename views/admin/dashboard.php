@@ -67,6 +67,51 @@ $productos = $productModel->getAll(); // Si no tienes getAll(), usa tu propia va
             </div>
         </div>
     </div>
+    <!-- Reporte de Compras para el Administrador -->
+<div class="container my-5">
+    <h3 class="mb-4 fw-bold">📊 Reporte de Compras y Pedidos</h3>
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID Pedido</th>
+                            <th>Usuario</th>
+                            <th>Total Pagado</th>
+                            <th>Método de Pago</th>
+                            <th>Dirección</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        require_once BASE_PATH . '/models/Order.php';
+                        $orderModel = new Order();
+                        $pedidos = $orderModel->getAllOrders();
+                        ?>
+                        <?php if (!empty($pedidos)): ?>
+                            <?php foreach ($pedidos as $ped): ?>
+                                <tr>
+                                    <td>#<?= $ped['id'] ?></td>
+                                    <td><?= htmlspecialchars($ped['usuario_nombre'] ?? 'Usuario General') ?></td>
+                                    <td class="fw-bold text-success">$<?= number_format($ped['total'], 0, ',', '.') ?> COP</td>
+                                    <td><?= htmlspecialchars($ped['metodo_pago']) ?></td>
+                                    <td><?= htmlspecialchars($ped['direccion']) ?></td>
+                                    <td><?= $ped['fecha'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-3">No hay compras registradas todavía.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <?php require_once BASE_PATH . '/includes/footer.php'; ?>
