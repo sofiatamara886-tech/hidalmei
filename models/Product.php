@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../config/database.php';
 
 class Product {
     private $conn;
@@ -11,13 +11,12 @@ class Product {
 
     public function getFiltered($paisId = null, $categoriaId = null) {
         $sql = "SELECT p.*, c.nombre as categoria_nombre, pa.nombre as pais_nombre 
-                FROM productos p
-                LEFT JOIN categorias c ON p.categoria_id = c.id
-                LEFT JOIN paises pa ON p.pais_id = pa.id
+                FROM productos p 
+                LEFT JOIN categorias c ON p.categoria_id = c.id 
+                LEFT JOIN paises pa ON p.pais_id = pa.id 
                 WHERE 1=1";
-        
-        $params = [];
 
+        $params = [];
         if ($paisId) {
             $sql .= " AND p.pais_id = :pais_id";
             $params[':pais_id'] = $paisId;
@@ -41,25 +40,31 @@ class Product {
     }
 
     // CREAR
-   public function create($nombre, $descripcion, $precio, $categoria_id, $pais_id) {
-    // Generar un slug único basado en el nombre (ej: "Libretas Bonitas" -> "libretas-bonitas-64a1b2")
-    $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $nombre))) . '-' . uniqid();
+    public function create($nombre, $descripcion, $precio, $categoria_id, $pais_id, $imagen = '') {
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $nombre))) . '-' . uniqid();
+        
+        $sql = "INSERT INTO productos (nombre, slug, descripcion, precio, categoria_id, pais_id, imagen) 
+                VALUES (:nombre, :slug, :descripcion, :precio, :categoria_id, :pais_id, :imagen)";
+                
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
+            ':nombre' => $nombre,
+            ':slug' => $slug,
+            ':descripcion' => $descripcion,
+            ':precio' => $precio,
+            ':categoria_id' => $categoria_id,
+            ':pais_id' => $pais_id,
+            ':imagen' => $imagen
+        ]);
+    }
 
-    $sql = "INSERT INTO productos (nombre, slug, descripcion, precio, categoria_id, pais_id) 
-            VALUES (:nombre, :slug, :descripcion, :precio, :categoria_id, :pais_id)";
-            
-    $stmt = $this->conn->prepare($sql);
-    return $stmt->execute([
-        ':nombre' => $nombre,
-        ':slug' => $slug,
-        ':descripcion' => $descripcion,
-        ':precio' => $precio,
-        ':categoria_id' => $categoria_id,
-        ':pais_id' => $pais_id
-    ]);
-}   // ACTUALIZAR
+    public function createWithImage($nombre, $descripcion, $precio, $categoria_id, $pais_id, $imagen) {
+        return $this->create($nombre, $descripcion, $precio, $categoria_id, $pais_id, $imagen);
+    }
+
+    // ACTUALIZAR NORMAL
     public function update($id, $nombre, $descripcion, $precio, $categoria_id, $pais_id) {
-        $sql = "UPDATE producto
+        $sql = "UPDATE productos 
                 SET nombre = :nombre, descripcion = :descripcion, precio = :precio, categoria_id = :categoria_id, pais_id = :pais_id 
                 WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
@@ -73,9 +78,27 @@ class Product {
         ]);
     }
 
+    // ACTUALIZAR CON IMAGEN
+    public function updateWithImage($id, $nombre, $descripcion, $precio, $categoria_id, $pais_id, $imagen) {
+        $sql = "UPDATE productos 
+                SET nombre = :nombre, descripcion = :descripcion, precio = :precio, categoria_id = :categoria_id, pais_id = :pais_id, imagen = :imagen 
+                WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
+            ':id' => $id,
+            ':nombre' => $nombre,
+            ':descripcion' => $descripcion,
+            ':precio' => $precio,
+            ':categoria_id' => $categoria_id,
+            ':pais_id' => $pais_id,
+            ':imagen' => $imagen
+        ]);
+    }
+
     // ELIMINAR
     public function delete($id) {
-        $stmt = $this->conn->prepare("DELETE FROM productos WHERE id = :id");
+        $sql = "DELETE FROM productos WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
         return $stmt->execute([':id' => $id]);
     }
 
@@ -88,6 +111,11 @@ class Product {
     public function getCategorias() {
         $stmt = $this->conn->prepare("SELECT * FROM categorias");
         $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAll() {
+        $stmt = $this->conn->query("SELECT * FROM productos ORDER BY id DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
