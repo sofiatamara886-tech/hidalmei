@@ -1,22 +1,349 @@
+/* =========================================================
+   HiDalMei - Tema visual
+   Solo estilos: no afecta la lógica del sitio.
+   ========================================================= */
+
+/* ---------- 1. Paleta y tipografías ---------- */
+:root {
+    --gamboge:   #E6CF5B;  /* color principal / fondo de paneles */
+    --sienna:    #3F1610;  /* encabezado y pie de página */
+    --vampiric:  #C7086A;  /* títulos y letra principal */
+    --brown:     #7B4E21;  /* texto corrido */
+    --kiwi:      #BDC808;  /* botones */
+    --rosy:      #E45E67;  /* detalles */
+
+    --panel:     rgba(230, 207, 91, 0.95);
+    --panel-soft: rgba(255, 255, 255, 0.42);
+
+    --font-text:  'Shadows Into Light Two', cursive;
+    --font-title: 'Mystery Quest', cursive;
+    --font-brand: 'Inspiration', cursive;
+
+    --primary-color: var(--gamboge);
+
+    /* Variables de Bootstrap */
+    --bs-body-font-family: var(--font-text);
+    --bs-body-font-size: 1.2rem;
+    --bs-body-color: var(--brown);
+    --bs-link-color: var(--vampiric);
+    --bs-link-hover-color: var(--sienna);
+}
+
+/* ---------- 2. Fondo de toda la página ---------- */
+html {
+    background: var(--sienna);
+}
+
+body {
+    font-family: var(--font-text);
+    font-size: 1.2rem;
+    color: var(--brown);
+    background-color: var(--sienna);
+    background-image: url('../img/fondo-hidalmei.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Panel que contiene el contenido de todas las páginas */
+main.container {
+    background: var(--panel);
+    border: 3px solid var(--rosy);
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(63, 22, 16, 0.45);
+    width: calc(100% - 2rem);
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+
+/* ---------- 3. Tipografía ---------- */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.card-title, .modal-title {
+    font-family: var(--font-title);
+    font-weight: 400;
+    color: var(--vampiric);
+    letter-spacing: 0.5px;
+}
+
+/* Mystery Quest solo tiene un peso: evitamos la "negrita falsa" */
+:is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6).fw-bold,
+.modal-title.fw-bold,
+.card-title.fw-bold {
+    font-weight: 400 !important;
+}
+
+p, li, label, td, th, span, small, .form-label {
+    font-family: var(--font-text);
+}
+
+button, input, select, textarea {
+    font-family: var(--font-text);
+}
+
+a {
+    color: var(--vampiric);
+}
+a:hover {
+    color: var(--sienna);
+}
+
+.text-primary, .text-success {
+    color: var(--vampiric) !important;
+}
+.text-muted, .text-secondary {
+    color: var(--brown) !important;
+}
+.text-dark {
+    color: var(--sienna) !important;
+}
+
+/* ---------- 4. Encabezado ---------- */
+header .nav-link,
+header a {
+    transition: color .15s ease;
+}
+header a:hover,
+header .nav-link:hover {
+    color: var(--kiwi) !important;
+}
+
+/* Los <li> del menú quedan sueltos en el HTML original:
+   los dejamos con aspecto de menú (sin viñeta). */
+header > li.nav-item {
+    list-style: none;
+}
+body > li.nav-item {
+    list-style: none;
+    background: var(--sienna);
+    border-bottom: 2px solid var(--rosy);
+    text-align: right;
+    padding: .35rem 2rem;
+}
+.nav-link {
+    color: var(--gamboge) !important;
+}
+.nav-link:hover {
+    color: var(--kiwi) !important;
+}
+
+/* ---------- 5. Pie de página ---------- */
+.site-footer {
+    background: var(--sienna);
+    color: var(--gamboge);
+    border-top: 3px solid var(--rosy);
+    text-align: center;
+    padding: 2rem 1rem 2.2rem;
+    margin-top: 3rem;
+}
+.site-footer__brand {
+    font-family: var(--font-brand);
+    font-size: 2.8rem;
+    line-height: 1.1;
+    color: var(--gamboge);
+}
+.site-footer p {
+    margin: .4rem 0 0;
+    color: var(--gamboge);
+}
+.site-footer__note {
+    color: var(--rosy) !important;
+    font-size: 1rem;
+}
+
+/* ---------- 6. Botones (Cheerly Kiwi) ---------- */
+.btn-primary,
+.btn-success,
+.btn-outline-primary {
+    --bs-btn-color: var(--sienna);
+    --bs-btn-bg: var(--kiwi);
+    --bs-btn-border-color: var(--sienna);
+    --bs-btn-hover-color: var(--sienna);
+    --bs-btn-hover-bg: var(--rosy);
+    --bs-btn-hover-border-color: var(--sienna);
+    --bs-btn-active-color: var(--sienna);
+    --bs-btn-active-bg: var(--rosy);
+    --bs-btn-active-border-color: var(--sienna);
+    --bs-btn-focus-shadow-rgb: 228, 94, 103;
+    --bs-btn-disabled-color: var(--sienna);
+    --bs-btn-disabled-bg: var(--kiwi);
+    --bs-btn-disabled-border-color: var(--sienna);
+    border-width: 2px;
+    font-weight: 700;
+}
+
+.btn-secondary,
+.btn-outline-secondary,
+.btn-outline-danger,
+.btn-outline-warning {
+    --bs-btn-color: var(--sienna);
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: var(--rosy);
+    --bs-btn-hover-color: var(--sienna);
+    --bs-btn-hover-bg: var(--rosy);
+    --bs-btn-hover-border-color: var(--rosy);
+    --bs-btn-active-color: var(--sienna);
+    --bs-btn-active-bg: var(--rosy);
+    --bs-btn-active-border-color: var(--rosy);
+    --bs-btn-focus-shadow-rgb: 228, 94, 103;
+    border-width: 2px;
+}
+
+/* Botones escritos con estilos propios (login, registro, etc.) */
+button[type="submit"]:hover {
+    filter: brightness(1.05);
+}
+
+/* ---------- 7. Tarjetas, tablas y fondos de Bootstrap ---------- */
+.card {
+    background-color: var(--panel-soft);
+    border: 2px solid var(--rosy) !important;
+    border-radius: 16px;
+    color: var(--brown);
+}
+.card-img-top {
+    border-radius: 14px 14px 0 0;
+}
+
+.bg-white {
+    background-color: var(--panel-soft) !important;
+}
+.bg-light {
+    background-color: rgba(255, 255, 255, 0.35) !important;
+}
+.bg-success {
+    background-color: var(--sienna) !important;
+}
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--brown);
+    --bs-table-border-color: var(--rosy);
+    --bs-table-hover-bg: rgba(228, 94, 103, 0.28);
+    --bs-table-hover-color: var(--sienna);
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.2);
+}
+.table-light {
+    --bs-table-bg: var(--sienna);
+    --bs-table-color: var(--gamboge);
+    --bs-table-border-color: var(--rosy);
+}
+.table > thead th {
+    font-family: var(--font-title);
+    font-weight: 400;
+    letter-spacing: .5px;
+}
+
+/* ---------- 8. Formularios ---------- */
+.form-control,
+.form-select,
+input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="file"]),
+textarea,
+select {
+    background-color: rgba(255, 255, 255, 0.72) !important;
+    border: 2px solid var(--brown) !important;
+    color: var(--sienna);
+    border-radius: 8px;
+}
+.form-control:focus,
+.form-select:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--rosy) !important;
+    box-shadow: 0 0 0 .25rem rgba(228, 94, 103, 0.35) !important;
+    outline: none;
+}
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+    color: var(--brown);
+    opacity: .7;
+}
+
+/* ---------- 9. Alertas ---------- */
+.alert {
+    background-color: var(--sienna);
+    color: var(--gamboge);
+    border: 2px solid var(--rosy);
+    border-radius: 12px;
+}
 .alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background-color: var(--kiwi);
+    color: var(--sienna);
+    border: 2px solid var(--sienna);
     padding: 12px 20px;
     margin: 15px auto;
-    border-radius: 6px;
     max-width: 400px;
     text-align: center;
     font-weight: 500;
 }
-/* Regla para dimensionar la imagen a 100x100 px */
+.alert-danger,
+.alert-error {
+    background-color: var(--rosy);
+    color: var(--sienna);
+    border: 2px solid var(--sienna);
+}
 
+/* ---------- 10. Ventanas modales ---------- */
+.modal-content {
+    background-color: var(--gamboge);
+    border: 3px solid var(--rosy) !important;
+    border-radius: 18px;
+    color: var(--brown);
+}
+.modal-header,
+.modal-footer {
+    background-color: var(--sienna) !important;
+    border-color: var(--rosy);
+}
+.modal-header .modal-title {
+    color: var(--gamboge) !important;
+}
+.modal-header .btn-close {
+    filter: invert(1) grayscale(1) brightness(1.6);
+    opacity: .9;
+}
 
-.hero-banner-img {
-    width: 70px !important;
-    height: 70px !important;
-    margin-top: 10px;
-    object-fit: cover !important;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+/* ---------- 11. Accesibilidad ---------- */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible {
+    outline: 3px solid var(--rosy);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ---------- 12. Pantallas pequeñas ---------- */
+@media (max-width: 992px) {
+    header {
+        flex-wrap: wrap;
+        justify-content: center !important;
+        gap: .5rem 1rem;
+        padding: .8rem 1rem !important;
+    }
+    header nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: .4rem 1rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        font-size: 1.1rem;
+    }
+    main.container {
+        border-radius: 16px;
+    }
+    body > li.nav-item {
+        text-align: center;
+    }
 }

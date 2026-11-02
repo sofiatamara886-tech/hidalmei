@@ -12,6 +12,11 @@ require_once BASE_PATH . '/includes/functions.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= APP_NAME ?></title>
     
+    <!-- Fuentes de Google: Inspiration (logo), Mystery Quest (títulos), Shadows Into Light Two (texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inspiration&family=Mystery+Quest&family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+    
     <!-- 1. Añade Bootstrap CSS aquí -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -19,34 +24,34 @@ require_once BASE_PATH . '/includes/functions.php';
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
 </head>
 <body>
-    <header style="background: #fff; border-bottom: 2px solid var(--primary-color, #e84393); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;">
+    <header style="background: var(--sienna); border-bottom: 2px solid var(--rosy); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;">
         <div class="logo">
-            <a href="<?= BASE_URL ?>" style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color, #e84393); text-decoration: none;">HiDalMei</a>
+            <a href="<?= BASE_URL ?>" style="font-family: var(--font-brand); font-size: 2.8rem; font-weight: normal; line-height: 1; color: var(--gamboge); text-decoration: none;">HiDalMei</a>
         </div>
         
         <nav style="display: flex; align-items: center; gap: 1.5rem;">
-            <a href="<?= BASE_URL ?>views/home.php" style="text-decoration: none; color: #333;">Inicio</a>
-            <a href="<?= BASE_URL ?>views/catalog/index.php" style="text-decoration: none; color: #333;">Catálogo</a>
+            <a href="<?= BASE_URL ?>views/home.php" style="text-decoration: none; color: var(--gamboge);">Inicio</a>
+            <a href="<?= BASE_URL ?>views/catalog/index.php" style="text-decoration: none; color: var(--gamboge);">Catálogo</a>
             
           <?php if (isAuthenticated()): ?>
-        <span style="font-weight: bold; color: #333;">
+        <span style="font-weight: bold; color: var(--gamboge);">
             Hola, <?= htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Usuario'); ?>
         </span>
 
         <!-- Botón exclusivo para el Administrador (Rol 1) -->
         <?php if (isset($_SESSION['usuario_rol']) && (int)$_SESSION['usuario_rol'] === 1): ?>
-            <a href="<?= BASE_URL ?>views/admin/dashboard.php" class="btn btn-sm btn-outline-primary" style="font-weight: bold; border-color: #e84393; color: #e84393; text-decoration: none; padding: 0.3rem 0.8rem; border-radius: 4px;">Panel Admin</a>
+            <a href="<?= BASE_URL ?>views/admin/dashboard.php" class="btn btn-sm btn-outline-primary" style="font-weight: bold; border-color: var(--kiwi); color: var(--kiwi); text-decoration: none; padding: 0.3rem 0.8rem; border-radius: 4px;">Panel Admin</a>
         <?php endif; ?>
 
-        <a href="<?= BASE_URL ?>views/orders/history.php" style="text-decoration: none; color: #333;">Mis Pedidos</a>
-        <a href="<?= BASE_URL ?>controllers/AuthController.php?action=logout" style="text-decoration: none; color: #333;">Cerrar Sesión</a>
+        <a href="<?= BASE_URL ?>views/orders/history.php" style="text-decoration: none; color: var(--gamboge);">Mis Pedidos</a>
+        <a href="<?= BASE_URL ?>controllers/AuthController.php?action=logout" style="text-decoration: none; color: var(--gamboge);">Cerrar Sesión</a>
         <?php else: ?>
-            <a href="<?= BASE_URL ?>views/auth/login.php" style="text-decoration: none; color: #333; font-weight: 500;">Iniciar Sesión</a>
-            <a href="<?= BASE_URL ?>views/auth/register.php" style="background: #e84393; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none;">Registrarse</a>
+            <a href="<?= BASE_URL ?>views/auth/login.php" style="text-decoration: none; color: var(--gamboge); font-weight: 500;">Iniciar Sesión</a>
+            <a href="<?= BASE_URL ?>views/auth/register.php" style="background: var(--kiwi); color: var(--sienna); font-weight: bold; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none;">Registrarse</a>
         <?php endif; ?>
         </nav>
         <li class="nav-item">
-    <a class="nav-link" href="<?= BASE_URL ?>views/quienes-somos.php" style="cursor: pointer; color: #333; font-weight: 500;">
+    <a class="nav-link" href="<?= BASE_URL ?>views/quienes-somos.php" style="cursor: pointer; color: var(--gamboge); font-weight: 500;">
         Quiénes Somos
     </a>
 </li>

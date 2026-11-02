@@ -15,10 +15,10 @@ require_once BASE_PATH . '/includes/header.php';
         max-width: 950px;
         margin: 3rem auto;
         padding: 3rem;
-        background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        background: rgba(255, 255, 255, 0.2);
         border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(232, 67, 147, 0.12);
-        border: 2px solid #ffd1dc;
+        box-shadow: none;
+        border: 3px dashed var(--rosy);
         position: relative;
         overflow: hidden;
     }
@@ -34,34 +34,34 @@ require_once BASE_PATH . '/includes/header.php';
     }
 
     .about-title {
-        color: #d63031;
-        font-weight: 800;
+        color: var(--vampiric);
+        font-weight: 400;
         text-align: center;
         margin-bottom: 1.5rem;
         font-size: 2.2rem;
         letter-spacing: 1px;
-        text-shadow: 2px 2px 4px rgba(232, 67, 147, 0.15);
+        text-shadow: 2px 2px 0 rgba(228, 94, 103, 0.35);
     }
 
     .about-subtitle {
         text-align: center;
-        color: #6c5ce7;
+        color: var(--brown);
         font-weight: 600;
         font-size: 1.1rem;
         margin-bottom: 2.5rem;
     }
 
     .about-box {
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.55);
         padding: 2rem;
         border-radius: 15px;
-        border-left: 5px solid #a29bfe;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        border-left: 5px solid var(--rosy);
+        box-shadow: 0 5px 15px rgba(63,22,16,0.12);
         margin-bottom: 2.5rem;
     }
 
     .about-text {
-        color: #2d3436;
+        color: var(--brown);
         line-height: 1.9;
         font-size: 1.05rem;
         text-align: justify;
@@ -73,12 +73,12 @@ require_once BASE_PATH . '/includes/header.php';
         text-align: center;
         margin-top: 3rem;
         padding-top: 2rem;
-        border-top: 2px dashed #ff7675;
+        border-top: 3px dashed var(--rosy);
     }
 
     .team-title {
-        color: #0984e3;
-        font-weight: 700;
+        color: var(--vampiric);
+        font-weight: 400;
         font-size: 1.8rem;
         margin-bottom: 2rem;
     }
@@ -91,13 +91,13 @@ require_once BASE_PATH . '/includes/header.php';
     }
 
     .team-card {
-        background: white;
+        background: rgba(255, 255, 255, 0.6);
         padding: 15px;
         border-radius: 15px;
-        box-shadow: 0 8px 20px rgba(116, 185, 255, 0.25);
+        box-shadow: 0 8px 20px rgba(63, 22, 16, 0.25);
         transition: transform 0.3s ease;
         width: 260px;
-        border: 2px solid #74b9ff;
+        border: 2px solid var(--rosy);
     }
 
     .team-card:hover {
@@ -110,19 +110,19 @@ require_once BASE_PATH . '/includes/header.php';
         object-fit: cover;
         border-radius: 12px;
         margin-bottom: 12px;
-        border: 2px solid #ffeaa7;
+        border: 2px solid var(--rosy);
     }
 
     .team-name {
         font-weight: 700;
-        color: #2d3436;
+        color: var(--sienna);
         font-size: 1.1rem;
         margin: 0;
     }
 
     .team-role {
         font-size: 0.85rem;
-        color: #e84393;
+        color: var(--vampiric);
         font-weight: 600;
         margin-top: 4px;
     }
@@ -156,19 +156,19 @@ require_once BASE_PATH . '/includes/header.php';
         
         <div class="team-card-container">
             <!-- Imagen general del equipo destacando a las integrantes -->
-            <div style="width: 100%; max-width: 500px; margin: 0 auto 2rem auto; background: white; padding: 15px; border-radius: 15px; box-shadow: 0 8px 25px rgba(232, 67, 147, 0.2); border: 2px solid #ff7675;">
+            <div style="width: 100%; max-width: 500px; margin: 0 auto 2rem auto; background: rgba(255, 255, 255, 0.6); padding: 15px; border-radius: 15px; box-shadow: 0 8px 25px rgba(63, 22, 16, 0.25); border: 2px solid var(--rosy);">
                 <img src="<?= BASE_URL ?>assets/img/equipo.jpg" alt="Equipo HiDalMei" class="team-img" style="height: 320px;">
                 <div style="display: flex; justify-content: space-around; margin-top: 10px; text-align: center;">
                     <div>
-                        <p class="team-name" style="font-size: 0.95rem;">Nicol Muñoz</p>
+                        <p class="team-name" style="font-size: 1.15rem;">Nicol Muñoz</p>
                         
                     </div>
                     <div>
-                        <p class="team-name" style="font-size: 0.95rem;">Danna Támara</p>
+                        <p class="team-name" style="font-size: 1.15rem;">Danna Támara</p>
                         
                     </div>
                     <div>
-                        <p class="team-name" style="font-size: 0.95rem;">Helen Tique</p>
+                        <p class="team-name" style="font-size: 1.15rem;">Helen Tique</p>
                         
                     </div>
                 </div>

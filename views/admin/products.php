@@ -18,7 +18,7 @@ if (isset($_GET['edit'])) {
     <h2>Gestión de Productos (CRUD)</h2>
 
     <!-- FORMULARIO CREAR / EDITAR -->
-    <form action="<?= BASE_URL ?>controllers/ProductController.php" method="POST" style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+    <form action="<?= BASE_URL ?>controllers/ProductController.php" method="POST" style="background: rgba(255,255,255,0.45); border: 2px solid var(--rosy); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
         <input type="hidden" name="action" value="<?= $productoEditar ? 'update' : 'create' ?>">
         <?php if ($productoEditar): ?>
             <input type="hidden" name="id" value="<?= $productoEditar['id'] ?>">
@@ -53,18 +53,18 @@ if (isset($_GET['edit'])) {
             <textarea name="descripcion" placeholder="Descripción" style="width: 100%; padding: 0.5rem;"><?= $productoEditar['descripcion'] ?? '' ?></textarea>
         </div>
 
-        <button type="submit" style="margin-top: 1rem; background: #e84393; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; cursor: pointer;">
+        <button type="submit" style="margin-top: 1rem; background: var(--kiwi); color: var(--sienna); border: 2px solid var(--sienna); font-weight: bold; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer;">
             <?= $productoEditar ? 'Guardar Cambios' : 'Crear Producto' ?>
         </button>
         <?php if ($productoEditar): ?>
-            <a href="<?= BASE_URL ?>views/admin/products.php" style="margin-left: 1rem; text-decoration: none; color: #666;">Cancelar</a>
+            <a href="<?= BASE_URL ?>views/admin/products.php" style="margin-left: 1rem; text-decoration: none; color: var(--brown);">Cancelar</a>
         <?php endif; ?>
     </form>
 
     <!-- TABLA DE PRODUCTOS -->
     <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: left;">
         <thead>
-            <tr style="background: #eee;">
+            <tr style="background: var(--sienna); color: var(--gamboge);">
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Categoría</th>
@@ -82,8 +82,8 @@ if (isset($_GET['edit'])) {
                     <td><?= htmlspecialchars($p['pais_nombre'] ?? 'N/A') ?></td>
                     <td>$<?= number_format($p['precio'], 2) ?></td>
                     <td>
-                        <a href="?edit=<?= $p['id'] ?>" style="color: #0984e3; margin-right: 0.5rem;">Editar</a>
-                        <a href="<?= BASE_URL ?>controllers/ProductController.php?action=delete&id=<?= $p['id'] ?>" onclick="return confirm('¿Seguro de eliminar?');" style="color: #d63031;">Eliminar</a>
+                        <a href="?edit=<?= $p['id'] ?>" style="color: var(--vampiric); margin-right: 0.5rem;">Editar</a>
+                        <a href="<?= BASE_URL ?>controllers/ProductController.php?action=delete&id=<?= $p['id'] ?>" onclick="return confirm('¿Seguro de eliminar?');" style="color: var(--vampiric);">Eliminar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

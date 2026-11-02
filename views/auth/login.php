@@ -2,13 +2,13 @@
 require_once __DIR__ . '/../../includes/header.php'; 
 ?>
 
-<div class="auth-container" style="max-width: 400px; margin: 2rem auto; padding: 2rem; background: #fff; border-radius: 8px;">
+<div class="auth-container" style="max-width: 400px; margin: 2rem auto; padding: 2rem; background: rgba(255,255,255,0.45); border: 2px solid var(--rosy); border-radius: 12px;">
     
     <h2>Iniciar Sesión en HiDalMei</h2>
 
     <!-- AVISO DE REGISTRO EXITOSO (Vía GET) -->
     <?php if (isset($_GET['registered']) && $_GET['registered'] == 1): ?>
-        <div style="background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 0.8rem; border-radius: 4px; margin-bottom: 1rem; text-align: center; font-weight: bold;">
+        <div style="background-color: var(--kiwi); color: var(--sienna); border: 2px solid var(--sienna); padding: 0.8rem; border-radius: 4px; margin-bottom: 1rem; text-align: center; font-weight: bold;">
             ¡Registro exitoso! Ya puedes iniciar sesión.
         </div>
     <?php endif; ?>
@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../includes/header.php';
             <input type="password" id="password" name="password" required style="width: 100%; padding: 0.5rem;">
         </div>
 
-        <button type="submit" style="padding: 0.6rem; background: #d63384; color: white; border: none; border-radius: 4px; cursor: pointer;">Iniciar Sesión</button>
+        <button type="submit" style="padding: 0.6rem; background: var(--kiwi); color: var(--sienna); font-weight: bold; border: 2px solid var(--sienna); border-radius: 8px; cursor: pointer;">Iniciar Sesión</button>
     </form>
 
 </div>
